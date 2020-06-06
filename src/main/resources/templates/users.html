@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Registred users list:</h2>
+<br>
+
+<tr th:each="counter: ${list}">
+    <td th:text="${counter.getRole()}"></td>
+    <td th:text="${counter.getName()}"></td>
+    <td th:text="${counter.getSurname()}"></td>
+    <td th:text="${counter.getEmail()}"></td>
+    <br><br>
+</tr>
+
+</body>
+</html>
