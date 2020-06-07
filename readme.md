@@ -1,6 +1,6 @@
 # Registration + email confirmation
 
-Web application, where user can register new account, using register form. Later user need to confirm his account, with link sent to his email adress.
+Web application, where user can register new account using register form. Later user need to confirm his account with link sent to his email adress.
 
 ## To start:
 
