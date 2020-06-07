@@ -29,7 +29,7 @@ PasswordEncoder passwordEncoder;
 
 
         User user2 = new User();
-        user2.setEmail("zagrodnikuwna@icloud.com");
+        user2.setEmail("francuz.kasia@gmail.com");
         user2.setUsername("Kasia");
         user2.setPassword(passwordEncoder.encode("Kasia123"));
         user2.setRole("ROLE_USER");
@@ -37,18 +37,19 @@ PasswordEncoder passwordEncoder;
         user2.setLocalDate("2000-01-22");
         user2.setMale(false);
         user2.setName("Kasia");
-        user2.setSurname("Zagrodnik");
+        user2.setSurname("Francuz");
+
 
         User user3 = new User();
-        user3.setEmail("kapusniak@icloud.com");
+        user3.setEmail("bogdan123@onet.pl");
         user3.setUsername("Bogdan");
         user3.setPassword(passwordEncoder.encode("Bogdan123"));
         user3.setRole("ROLE_USER");
         user3.setEmailConfirmed(false);
         user3.setLocalDate("2020-01-01");
         user3.setMale(true);
-        user3.setName("Kapu");
-        user3.setSurname("sniak");
+        user3.setName("Bogdan");
+        user3.setSurname("Kowalski");
 
         userRepo.save(user1);
         userRepo.save(user2);
