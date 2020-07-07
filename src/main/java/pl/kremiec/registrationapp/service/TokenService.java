@@ -10,25 +10,14 @@ import pl.kremiec.registrationapp.repo.UserRepo;
 import java.util.UUID;
 
 @Service
-public class UserRepoSave {
+public class TokenService {
 
-    PasswordEncoder passwordEncoder;
-    UserRepo userRepo;
     MailService mailService;
     TokenRepo tokenRepo;
 
-    public UserRepoSave(PasswordEncoder passwordEncoder, UserRepo userRepo, MailService mailService, TokenRepo tokenRepo) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepo = userRepo;
+    public TokenService(MailService mailService, TokenRepo tokenRepo) {
         this.mailService = mailService;
         this.tokenRepo = tokenRepo;
-    }
-
-    public void saveUserToRepo(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
-        userRepo.save(user);
-        sendTokenToUser(user);
     }
 
     public void sendTokenToUser(User user){

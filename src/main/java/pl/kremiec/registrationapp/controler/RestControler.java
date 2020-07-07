@@ -10,21 +10,17 @@ import pl.kremiec.registrationapp.model.Token;
 import pl.kremiec.registrationapp.model.User;
 import pl.kremiec.registrationapp.repo.TokenRepo;
 import pl.kremiec.registrationapp.repo.UserRepo;
-import pl.kremiec.registrationapp.service.UserRepoSave;
-
-import java.util.ArrayList;
-import java.util.List;
+import pl.kremiec.registrationapp.service.RestService;
+import pl.kremiec.registrationapp.service.TokenService;
 
 @Controller
 public class RestControler {
 
-    UserRepoSave userRepoSave;
-    TokenRepo tokenRepo;
+    RestService restService;
     UserRepo userRepo;
 
-    public RestControler(UserRepoSave userRepoSave, TokenRepo tokenRepo, UserRepo userRepo) {
-        this.userRepoSave = userRepoSave;
-        this.tokenRepo = tokenRepo;
+    public RestControler(RestService restService, UserRepo userRepo) {
+        this.restService = restService;
         this.userRepo = userRepo;
     }
 
@@ -33,38 +29,28 @@ public class RestControler {
         return "welcomePage";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/user/create")
     public String register(Model model){
-        User user = new User();
-        model.addAttribute("user", user);
-        return "register";
+        model.addAttribute("user", new User());
+        return "userCreate";
     }
 
-    @PostMapping("/registerDone")
+    @PostMapping("/user/created")
     public String submitForm(@ModelAttribute("user") User user) {
-        userRepoSave.saveUserToRepo(user);
+        restService.saveUserToRepo(user);
         return "emailSent";
     }
 
     @GetMapping("/token")
     public String singup(@RequestParam String value) {
-        Token byValue = tokenRepo.findByToken(value);
-        User user = byValue.getUser();
-        user.setEmailConfirmed(true);
-        userRepo.save(user);
-        return "confirmed";
+        restService.activateUser(value);
+        return "userConfirmed";
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user/getall")
     public String users(Model model){
-
-        List<User> arrayList = new ArrayList<>();
-
-        userRepo.findAll().forEach(s->arrayList.add(s));
-
-        model.addAttribute("list", arrayList);
-
-        return "users";
+        model.addAttribute("list", userRepo.findAll());
+        return "usersGetAll";
     }
 
 
