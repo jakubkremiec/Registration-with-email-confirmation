@@ -1,5 +1,6 @@
 package pl.kremiec.registrationapp.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kremiec.registrationapp.model.Token;
@@ -11,6 +12,9 @@ import java.util.UUID;
 
 @Service
 public class TokenService {
+
+    @Value("${token.path}")
+    String tokenUrl;
 
     MailService mailService;
     TokenRepo tokenRepo;
@@ -27,7 +31,7 @@ public class TokenService {
         token.setUser(user);
         tokenRepo.save(token);
 
-        String tokenUrl = "http://localhost:8080/token?value=" + token.getToken();
+        tokenUrl += token.getToken();
 
         mailService.sendConfirmationToken(user, "Confirm your account!", "Hello " + user.getName() + "!\nPlease confirm your email adress: " + tokenUrl);
     }
