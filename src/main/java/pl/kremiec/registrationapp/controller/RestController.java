@@ -1,4 +1,4 @@
-package pl.kremiec.registrationapp.controler;
+package pl.kremiec.registrationapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,20 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.kremiec.registrationapp.model.Token;
 import pl.kremiec.registrationapp.model.User;
-import pl.kremiec.registrationapp.repo.TokenRepo;
 import pl.kremiec.registrationapp.repo.UserRepo;
 import pl.kremiec.registrationapp.service.RestService;
-import pl.kremiec.registrationapp.service.TokenService;
 
 @Controller
-public class RestControler {
+public class RestController {
 
     RestService restService;
     UserRepo userRepo;
 
-    public RestControler(RestService restService, UserRepo userRepo) {
+    public RestController(RestService restService, UserRepo userRepo) {
         this.restService = restService;
         this.userRepo = userRepo;
     }
