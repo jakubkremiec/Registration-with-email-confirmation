@@ -36,14 +36,24 @@ public class RestControler {
     }
 
     @PostMapping("/user/created")
-    public String submitForm(@ModelAttribute("user") User user) {
-        restService.saveUserToRepo(user);
-        return "emailSent";
+    public String submitForm(@ModelAttribute("user") User user, Model model) {
+        model.addAttribute("user", user);
+        if(restService.emailCheck(user.getEmail())){
+            restService.saveUserToRepo(user);
+            return "emailSent";
+        } else {
+            return "redirect:/user/create";
+        }
     }
 
     @GetMapping("/token")
-    public String singup(@RequestParam String value) {
-        restService.activateUser(value);
+    public String singup(@RequestParam String value, Model model) {
+        try {
+            restService.activateUser(value);
+        }catch (NullPointerException ex){
+            model.addAttribute("value", value);
+            return "tokenNotFound";
+        }
         return "userConfirmed";
     }
 

@@ -35,4 +35,12 @@ public class RestService {
         user.setEmailConfirmed(true);
         userRepo.save(user);
     }
+
+    public boolean emailCheck(String email){
+        if (email.matches(".+@.+\\..+")){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

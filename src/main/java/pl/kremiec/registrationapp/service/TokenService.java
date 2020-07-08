@@ -36,7 +36,4 @@ public class TokenService {
         mailService.sendConfirmationToken(user, "Confirm your account!", "Hello " + user.getName() + "!\nPlease confirm your email adress: " + tokenUrl);
     }
 
-
-
-
 }

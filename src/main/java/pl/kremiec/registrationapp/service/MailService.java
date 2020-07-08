@@ -17,7 +17,7 @@ public class MailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendConfirmationToken(User user, String subject, String text){
+    public void sendConfirmationToken(User user, String subject, String text) {
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
@@ -30,6 +30,5 @@ public class MailService {
         }
 
         javaMailSender.send(mimeMessage);
-
     }
 }
