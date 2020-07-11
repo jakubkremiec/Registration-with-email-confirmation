@@ -14,17 +14,17 @@ import java.util.UUID;
 public class TokenService {
 
     @Value("${token.path}")
-    String tokenUrl;
+    private String tokenUrl;
 
-    MailService mailService;
-    TokenRepo tokenRepo;
+    private MailService mailService;
+    private TokenRepo tokenRepo;
 
     public TokenService(MailService mailService, TokenRepo tokenRepo) {
         this.mailService = mailService;
         this.tokenRepo = tokenRepo;
     }
 
-    public void sendTokenToUser(User user){
+    protected void sendTokenToUser(User user){
 
         Token token = new Token();
         token.setToken(UUID.randomUUID().toString());

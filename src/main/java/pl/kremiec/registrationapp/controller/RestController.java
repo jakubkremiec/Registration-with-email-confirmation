@@ -13,8 +13,8 @@ import pl.kremiec.registrationapp.service.RestService;
 @Controller
 public class RestController {
 
-    RestService restService;
-    UserRepo userRepo;
+    private RestService restService;
+    private UserRepo userRepo;
 
     public RestController(RestService restService, UserRepo userRepo) {
         this.restService = restService;
@@ -32,7 +32,7 @@ public class RestController {
         return "userCreate";
     }
 
-    @PostMapping("/user/created")
+    @PostMapping("/user/create")
     public String submitForm(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("user", user);
         if(restService.emailCheck(user.getEmail())){
@@ -45,16 +45,11 @@ public class RestController {
 
     @GetMapping("/token")
     public String singup(@RequestParam String value, Model model) {
-        try {
-            restService.activateUser(value);
-        }catch (NullPointerException ex){
-            model.addAttribute("value", value);
-            return "tokenNotFound";
-        }
+        restService.activateUser(value);
         return "userConfirmed";
     }
 
-    @GetMapping("/user/getall")
+    @GetMapping("/users/all")
     public String users(Model model){
         model.addAttribute("list", userRepo.findAll());
         return "usersGetAll";
