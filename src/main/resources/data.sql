@@ -1,0 +1,4 @@
+INSERT INTO user (email, role, username, password, is_email_confirmed, name, surname, local_date, is_male) VALUES
+  ('JakubKremiec99@icloud.com', 'ROLE_ADMIN', 'JakubK', '$2a$10$jQkyzktvPqU7n.Hk6ZLD2eME/vQh3r.RnH857v.ZRovF4YwFLirTW', true, 'Jakub', 'Kremiec', '1999-07-21', true),
+  ('Kasia.z@gmail.com', 'ROLE_USER', 'KasiaZ12345', '$2a$10$87cEZTV7i3Io5.KAl.bJ8uWXUYSwvQ78p98aEO/NmiQqyyD3Uv/Za', true, 'Kasia', 'Zara', '2000-01-01', false),
+  ('BogdanB@Onet.eu', 'ROLE_USER', 'Bogdan123', '$2a$10$jQkyzktvPqU7n.Hk6ZLD2eME/vQh3r.RnH857v.ZRovF4YwFLirTW', false , 'Bogdan', 'Bogdanski', '1971-06-23', true);

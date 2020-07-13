@@ -9,9 +9,9 @@ import pl.kremiec.registrationapp.repo.UserRepo;
 @Service
 public class UserDetailsFromRepo implements UserDetailsService {
 
-    UserRepo userRepo;
+    private UserRepo userRepo;
 
-    public UserDetailsFromRepo(UserRepo userRepo) {
+    protected UserDetailsFromRepo(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 

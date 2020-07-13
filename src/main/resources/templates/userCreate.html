@@ -7,7 +7,7 @@
 <body>
 <div align="center">
         <h1>User Registration</h1>
-        <form action="#" th:action="@{/registerDone}" method="post" th:object="${user}">
+        <form action="#" th:action="@{/user/create}" method="post" th:object="${user}">
 
             <label>Name:</label>
             <input type="text" th:field="*{name}" /><br><br>

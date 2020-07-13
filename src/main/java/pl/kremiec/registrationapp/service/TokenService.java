@@ -1,5 +1,6 @@
 package pl.kremiec.registrationapp.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kremiec.registrationapp.model.Token;
@@ -10,40 +11,29 @@ import pl.kremiec.registrationapp.repo.UserRepo;
 import java.util.UUID;
 
 @Service
-public class UserRepoSave {
+public class TokenService {
 
-    PasswordEncoder passwordEncoder;
-    UserRepo userRepo;
-    MailService mailService;
-    TokenRepo tokenRepo;
+    @Value("${token.path}")
+    private String tokenUrl;
 
-    public UserRepoSave(PasswordEncoder passwordEncoder, UserRepo userRepo, MailService mailService, TokenRepo tokenRepo) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepo = userRepo;
+    private MailService mailService;
+    private TokenRepo tokenRepo;
+
+    public TokenService(MailService mailService, TokenRepo tokenRepo) {
         this.mailService = mailService;
         this.tokenRepo = tokenRepo;
     }
 
-    public void saveUserToRepo(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
-        userRepo.save(user);
-        sendTokenToUser(user);
-    }
-
-    public void sendTokenToUser(User user){
+    protected void sendTokenToUser(User user){
 
         Token token = new Token();
         token.setToken(UUID.randomUUID().toString());
         token.setUser(user);
         tokenRepo.save(token);
 
-        String tokenUrl = "http://localhost:8080/token?value=" + token.getToken();
+        tokenUrl += token.getToken();
 
         mailService.sendConfirmationToken(user, "Confirm your account!", "Hello " + user.getName() + "!\nPlease confirm your email adress: " + tokenUrl);
     }
-
-
-
 
 }

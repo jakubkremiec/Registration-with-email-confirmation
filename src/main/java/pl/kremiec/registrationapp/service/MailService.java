@@ -11,13 +11,13 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class MailService {
 
-    JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
-    public MailService(JavaMailSender javaMailSender) {
+    protected MailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendConfirmationToken(User user, String subject, String text){
+    protected void sendConfirmationToken(User user, String subject, String text) {
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
@@ -30,6 +30,5 @@ public class MailService {
         }
 
         javaMailSender.send(mimeMessage);
-
     }
 }
