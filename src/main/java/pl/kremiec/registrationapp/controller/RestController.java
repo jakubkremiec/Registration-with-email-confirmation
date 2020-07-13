@@ -43,7 +43,7 @@ public class RestController {
         }
     }
 
-    @GetMapping("/token")
+    @GetMapping("/user/token")
     public String singup(@RequestParam String value, Model model) {
         restService.activateUser(value);
         return "userConfirmed";
